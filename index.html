@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TaskFlow Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Task<span>Flow</span></div>
+  <div class="search-wrap">
+    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="search" placeholder="Search tasks…"/>
+  </div>
+  <div class="nav-right">
+    <select id="filter">
+      <option value="">All categories</option>
+      <option value="design">Design</option>
+      <option value="development">Development</option>
+      <option value="research">Research</option>
+      <option value="marketing">Marketing</option>
+      <option value="other">Other</option>
+    </select>
+    <label class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <div class="toggle-track" id="toggleTrack">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span id="themeLabel">Dark</span>
+    </label>
+    <button class="btn-new" id="btnNew">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      New Task
+    </button>
+  </div>
+</nav>
+
+<!-- ANALYTICS -->
+<div class="analytics">
+  <div class="stat-card s-all">
+    <div class="label">Total Tasks</div>
+    <div class="value" id="statTotal">0</div>
+  </div>
+  <div class="stat-card s-todo">
+    <div class="label">To Do</div>
+    <div class="value" id="statTodo">0</div>
+  </div>
+  <div class="stat-card s-prog">
+    <div class="label">In Progress</div>
+    <div class="value" id="statProg">0</div>
+  </div>
+  <div class="stat-card s-done">
+    <div class="label">Done</div>
+    <div class="value" id="statDone">0</div>
+  </div>
+</div>
+
+<!-- BOARD -->
+<div class="board-wrapper" id="boardWrapper">
+
+  <div class="column col-todo" data-col="todo">
+    <div class="col-header">
+      <div class="col-dot"></div>
+      <span class="col-title">To Do</span>
+      <span class="col-count" id="count-todo">0</span>
+    </div>
+    <div class="task-list" id="list-todo">
+      <div class="empty-state">No tasks yet. Add one!</div>
+    </div>
+  </div>
+
+  <div class="column col-progress" data-col="progress">
+    <div class="col-header">
+      <div class="col-dot"></div>
+      <span class="col-title">In Progress</span>
+      <span class="col-count" id="count-progress">0</span>
+    </div>
+    <div class="task-list" id="list-progress">
+      <div class="empty-state">Nothing in progress.</div>
+    </div>
+  </div>
+
+  <div class="column col-done" data-col="done">
+    <div class="col-header">
+      <div class="col-dot"></div>
+      <span class="col-title">Done</span>
+      <span class="col-count" id="count-done">0</span>
+    </div>
+    <div class="task-list" id="list-done">
+      <div class="empty-state">Completed tasks appear here.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">New Task</h2>
+    <div class="form-group">
+      <label for="taskTitle">Title *</label>
+      <input type="text" id="taskTitle" placeholder="What needs to be done?" maxlength="80"/>
+    </div>
+    <div class="form-group">
+      <label for="taskDesc">Description</label>
+      <textarea id="taskDesc" placeholder="Optional details…"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="taskPriority">Priority</label>
+      <select id="taskPriority">
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="taskCategory">Category</label>
+      <select id="taskCategory">
+        <option value="other">Other</option>
+        <option value="design">Design</option>
+        <option value="development">Development</option>
+        <option value="research">Research</option>
+        <option value="marketing">Marketing</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="btnCancel">Cancel</button>
+      <button class="btn-submit" id="btnSubmit">Add Task</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
